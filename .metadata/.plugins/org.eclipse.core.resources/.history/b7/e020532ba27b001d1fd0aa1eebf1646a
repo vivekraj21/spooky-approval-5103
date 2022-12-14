@@ -1,0 +1,29 @@
+package com.masai.services;
+
+import java.util.List;
+
+import com.masai.model.Planter;
+
+
+
+public interface IPlanterServices {
+	
+	public Planter addPlanter(Planter planter);
+	
+
+	public Planter updatePlanter(Planter planter);
+	
+	
+	public Planter deletePlanter(Planter planter);
+	
+	
+	public Planter viewPlanters(Integer planterId);
+	
+	
+	public List<Planter> viewPlantersByShape(String planterShape);
+	
+	
+	
+	
+	
+}

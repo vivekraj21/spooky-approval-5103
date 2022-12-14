@@ -1,0 +1,61 @@
+package com.masai.Services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.masai.Repository.planterDAO;
+import com.masai.model.Planter;
+
+
+@Service
+public class IPlantersServicesImplementaion implements IPlanterServices{
+
+	@Autowired
+	public planterDAO pdao;
+	
+	
+	
+	public Planter addPlanter(Planter planter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Planter updatePlanter(Planter planter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Planter deletePlanter(Planter planter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Planter viewPlanter(Integer planterId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Planter> viewPlantersByShape(String planterShape) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Planter> viewAllPlanters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Planter> viewAllPlantersByCostRange(double minCost, double maxCost) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

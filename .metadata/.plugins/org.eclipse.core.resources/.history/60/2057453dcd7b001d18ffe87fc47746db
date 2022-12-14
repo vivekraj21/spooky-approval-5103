@@ -1,0 +1,47 @@
+package com.masai.model;
+
+import jakarta.annotation.Generated;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Entity
+@AllArgsConstructor
+@ToString
+public class Planter {
+	
+	@Id
+	@GeneratedValue(strategy =  GenerationType.AUTO)
+	private int planterId;
+	
+	private float planterHeight;
+	
+	private int planterCapacity;
+	
+	@Min(value = 0)
+	private int drinageHoles;
+	
+	private String planterColor;
+	
+	private String planterShape;
+	
+	@Min(value = 0)
+	private int planterStock;
+	
+	@Min(value = 0)
+	private int planterCost;
+	
+//	private Plants plants;
+//	
+//	private Seeds seeds;
+	
+	
+	
+
+}
