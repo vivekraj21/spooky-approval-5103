@@ -1,3 +1,4 @@
+
 package com.masai.model;
 
 import jakarta.persistence.Entity;
