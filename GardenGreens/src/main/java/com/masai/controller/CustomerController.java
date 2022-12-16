@@ -1,8 +1,12 @@
 package com.masai.controller;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.masai.model.Customer;
 import com.masai.model.Orders;
 import com.masai.service.CustomerService;
+import com.masai.service.OrderService;
 
 @RestController
 public class CustomerController {
@@ -19,29 +24,37 @@ public class CustomerController {
 	@Autowired
 	private CustomerService cService;
 	
+	@Autowired 
+	private OrderService oService;
+	
 	@PostMapping("/customer")
-	public Customer addCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
 		
 		
-		return cService.addCustomer(customer);
 		
+		Customer c = cService.addCustomer(customer);
+		return new ResponseEntity<Customer>(c, HttpStatus.ACCEPTED);
 		
 	}
 	
 	
-	@PostMapping("/customer/order/{id}")
-	public String addOrderToCustomer(@PathVariable int id, @RequestBody Orders order) {
+	@PostMapping("/customer/order/{name}")
+	public ResponseEntity<String> addOrderToCustomer(@PathVariable("username") String username, @RequestBody Orders order) {
 		
-		cService.addOrderToCustomer(id, order);
 		
-		return "Order Placed";
+		order.setOrderDate(LocalDate.now());
+		cService.addOrderToCustomer(username, order);
+		
+		return new ResponseEntity<String>("Order Placed...",HttpStatus.OK);
 		
 	}
 	
 	@GetMapping("/customer/order/{id}")
-	public Set<Orders> viewAllOrders(@PathVariable("id") int id){
+	public ResponseEntity<Set<Orders>> viewAllOrders(@PathVariable("id") int id){
 		
-		return cService.viewAllOrders(id);
+		Set<Orders> o = cService.viewAllOrders(id);
+		
+		return new ResponseEntity<Set<Orders>>(o,HttpStatus.OK);
 		
 	}
 	
