@@ -12,7 +12,7 @@ public interface SeedsDao extends JpaRepository<Seeds, Integer>{
 	
 	public List<Seeds> findBycommonName(String commonName) throws SeedsExceptions;
 	
-	public Seeds findBy(String commonName) throws SeedsExceptions;
+//	public Seeds findBycommonName(String commonName) throws SeedsExceptions;
 	
 	
 	

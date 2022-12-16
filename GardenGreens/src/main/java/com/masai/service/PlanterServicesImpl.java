@@ -1,6 +1,5 @@
 package com.masai.service;
 
-import java.lang.StackWalker.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import com.masai.exception.CustomerException;
 import com.masai.exception.PlanterExceptions;
 import com.masai.model.CurrentUserSession;
 import com.masai.model.Planter;
-import com.masai.model.Plants;
 import com.masai.repository.CurrentSessionRepo;
 import com.masai.repository.PlanterDao;
 
@@ -20,7 +18,7 @@ import com.masai.repository.PlanterDao;
 public class PlanterServicesImpl implements PlanterServices{
 	
 	@Autowired
-	private PlanterDao pdao;
+	private PlanterDao ptdao;
 	
 	@Autowired
 	private CurrentSessionRepo cDao ;
@@ -38,9 +36,9 @@ public class PlanterServicesImpl implements PlanterServices{
 		{
 			throw new CustomerException("Admin not login , Please Enter a Valid Key....");
 		}else {
-			Optional<Planter> opt  = pdao.findById(planter.getPlanterId());
+			Optional<Planter> opt  = ptdao.findById(planter.getPlanterId());
 		    if(opt.isEmpty()) {
-		     return pdao.save(planter);
+		     return ptdao.save(planter);
 		    }else
 		    	throw new PlanterExceptions("planter already exits..");
 		}
@@ -60,11 +58,11 @@ public class PlanterServicesImpl implements PlanterServices{
 			throw new CustomerException("Admin not login , Please Enter a Valid Key....");
 		}else {
 			
-			Optional<Planter> opt  = pdao.findById(planter.getPlanterId());
+			Optional<Planter> opt  = ptdao.findById(planter.getPlanterId());
 			Planter p = opt.get();
 			
 			if(opt.isPresent()) {
-				return pdao.save(planter);
+				return ptdao.save(planter);
 			}else
 				throw new PlanterExceptions("Planters does not exits with Id ");
 		}
@@ -83,10 +81,10 @@ public class PlanterServicesImpl implements PlanterServices{
 			throw new CustomerException("Admin not login , Please Enter a Valid Key....");
 		}else {
 			
-			Optional<Planter> opt  = pdao.findById(planter.getPlanterId());
+			Optional<Planter> opt  = ptdao.findById(planter.getPlanterId());
 			Planter p = opt.get();
 			if(opt.isPresent()) {
-				pdao.delete(planter);
+				ptdao.delete(planter);
 				return p;
 			}else {
 				throw new PlanterExceptions("Planters does not exits....");
@@ -98,7 +96,7 @@ public class PlanterServicesImpl implements PlanterServices{
 	@Override
 	public Planter viewPlanter(Integer planterId) throws PlanterExceptions {
 		// TODO Auto-generated method stub
-		Optional<Planter> opt  = pdao.findById(planterId);
+		Optional<Planter> opt  = ptdao.findById(planterId);
 	    if(opt.isPresent()) {
 	    	return opt.get();
 	    }else
@@ -110,7 +108,7 @@ public class PlanterServicesImpl implements PlanterServices{
 	public List<Planter> viewPlantersByShape(String planterShape) throws PlanterExceptions {
 		// TODO Auto-generated method stub
 		
-		List<Planter> pList = pdao.findByShape(planterShape);
+		List<Planter> pList = ptdao.findByplanterShape(planterShape);
 		if(pList.isEmpty()) {
 			throw new PlanterExceptions("Planters does not exits with shape :"+planterShape);
 		}else {
@@ -122,7 +120,7 @@ public class PlanterServicesImpl implements PlanterServices{
 	@Override
 	public List<Planter> viewAllPlanters() throws PlanterExceptions {
 		// TODO Auto-generated method stub
-		List<Planter> pList = pdao.findAll();
+		List<Planter> pList = ptdao.findAll();
 		if(pList.isEmpty()) {
 			throw new PlanterExceptions("Planters does not exits...");
 		}else {
@@ -136,7 +134,7 @@ public class PlanterServicesImpl implements PlanterServices{
 	public List<Planter> viewAllPlantersByCostRange(double minCost, double maxCost) throws PlanterExceptions {
 		// TODO Auto-generated method stub
 		
-		List<Planter> pList = pdao.findByplanterCostBetween(minCost, maxCost);
+		List<Planter> pList = ptdao.findByplanterCostBetween(minCost, maxCost);
 		if(pList.isEmpty()) {
 			throw new PlanterExceptions("Planters does not exits...");
 		}else {

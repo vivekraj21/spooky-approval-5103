@@ -8,7 +8,7 @@ import com.masai.exception.OrderException;
 import com.masai.model.Customer;
 import com.masai.model.Orders;
 
-import jakarta.persistence.criteria.Order;
+
 
 public interface CustomerService {
 

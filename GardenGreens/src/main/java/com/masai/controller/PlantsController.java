@@ -11,32 +11,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.model.Plants;
 import com.masai.service.PlantsService;
 
 @RestController
+@RequestMapping("/plantservice")
 public class PlantsController {
 	
 	@Autowired
 	private PlantsService pService;
 	
 	@PostMapping("/plants")
-	public ResponseEntity<Plants> addPlantHandler(@RequestBody Plants plant){
-		Plants newPlant= pService.addPlant(plant);
+	public ResponseEntity<Plants> addPlantHandler(@RequestBody Plants plant,@PathVariable("key") String key){
+		Plants newPlant= pService.addPlant(plant,key);
 		return new ResponseEntity<Plants>(newPlant, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/plants")
-	public ResponseEntity<Plants> updatePlantsHandler(@RequestBody Plants plant){
-		Plants updatedPlant = pService.updatePlants(plant);
+	public ResponseEntity<Plants> updatePlantsHandler(@RequestBody Plants plant,@PathVariable("key") String key){
+		Plants updatedPlant = pService.updatePlants(plant,key);
 		return new ResponseEntity<Plants>(updatedPlant, HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/plants/{plantId}")
-	public ResponseEntity<Plants> deletePlantsbyIdHandler(@PathVariable("plantId") Integer plantId){
-		Plants deletedPlant = pService.deletePlantsbyId(plantId);
+	public ResponseEntity<Plants> deletePlantsbyIdHandler(@PathVariable("plantId") Integer plantId,@PathVariable("key") String key){
+		Plants deletedPlant = pService.deletePlantsbyId(plantId,key);
 		return new ResponseEntity<Plants>(deletedPlant, HttpStatus.OK);
 	}
 	
