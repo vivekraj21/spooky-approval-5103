@@ -1,5 +1,6 @@
 package com.masai.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
 //		if (opt.isPresent()) {
 //			throw new OrderException("Order already present...");
 //		}
-
+        order.setOrderDate(LocalDate.now());
 		return oDao.save(order);
 
 	}

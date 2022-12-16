@@ -1,5 +1,6 @@
 package com.masai.controller;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.masai.model.Customer;
 import com.masai.model.Orders;
 import com.masai.service.CustomerService;
+import com.masai.service.OrderService;
 
 @RestController
 public class CustomerController {
 
 	@Autowired
 	private CustomerService cService;
+	
+	@Autowired 
+	private OrderService oService;
 	
 	@PostMapping("/customer")
 	public Customer addCustomer(@RequestBody Customer customer) {
@@ -32,6 +37,8 @@ public class CustomerController {
 	@PostMapping("/customer/order/{id}")
 	public String addOrderToCustomer(@PathVariable int id, @RequestBody Orders order) {
 		
+		
+		order.setOrderDate(LocalDate.now());
 		cService.addOrderToCustomer(id, order);
 		
 		return "Order Placed";
