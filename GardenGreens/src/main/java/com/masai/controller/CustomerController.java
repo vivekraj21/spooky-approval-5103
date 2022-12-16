@@ -35,11 +35,11 @@ public class CustomerController {
 	
 	
 	@PostMapping("/customer/order/{id}")
-	public String addOrderToCustomer(@PathVariable int id, @RequestBody Orders order) {
+	public String addOrderToCustomer(@PathVariable String username, @RequestBody Orders order) {
 		
 		
 		order.setOrderDate(LocalDate.now());
-		cService.addOrderToCustomer(id, order);
+		cService.addOrderToCustomer(username, order);
 		
 		return "Order Placed";
 		
