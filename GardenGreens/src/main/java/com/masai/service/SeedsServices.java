@@ -13,14 +13,14 @@ public interface SeedsServices {
 	
 	public Seeds updateSeed(Seeds seed,String key)throws SeedsExceptions;
 	
-	public Seeds deleteSeed(Seeds seed,String key)throws SeedsExceptions;
+	public Seeds deleteSeed(Integer seedId,String key)throws SeedsExceptions;
 
 	public Seeds viewSeedById(Integer SeedId)throws SeedsExceptions;
 
- 	public Seeds viewSeedByCommonName(String commonName)throws SeedsExceptions;
+ 	public List<Seeds> viewSeedByCommonName(String commonName)throws SeedsExceptions;
 	
 	public List<Seeds> viewAllSeeds()throws SeedsExceptions;
 	
-	public List<Seeds> viewAllSeedsByType(String typeOfSeed)throws SeedsExceptions;
+//	public List<Seeds> viewAllSeedsByType(String typeOfSeed)throws SeedsExceptions;
 
 }
