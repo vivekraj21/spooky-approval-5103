@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Address {
     
+	//hello
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer addressId;

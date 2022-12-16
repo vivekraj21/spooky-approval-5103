@@ -6,8 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exception.CustomerException;
 import com.masai.exception.PlantsException;
+import com.masai.model.CurrentUserSession;
 import com.masai.model.Plants;
+import com.masai.repository.CurrentSessionRepo;
 import com.masai.repository.PlantDao;
 
 @Service
@@ -15,31 +18,52 @@ public class PlantServImpl implements PlantsService {
 	@Autowired
 	private PlantDao pdao;
 	
+	@Autowired
+	private CurrentSessionRepo cDao ;
+	
 	@Override
-	public Plants addPlant(Plants plant)throws PlantsException{
+	public Plants addPlant(Plants plant,String key)throws PlantsException{
+		CurrentUserSession  loggedAdmin = cDao.findByUuid(key);
+	
+		if(loggedAdmin==null)
+		{
+			throw new CustomerException("Admin not login , Please Enter a Valid Key....");
+		}else {
 		Plants newPlant = pdao.save(plant);
-		return newPlant;
+		return newPlant;}
 	}	
 	
 	@Override
-	public Plants updatePlants(Plants plant)throws PlantsException{
+	public Plants updatePlants(Plants plant,String key)throws PlantsException{
+		CurrentUserSession  loggedAdmin = cDao.findByUuid(key);
+		
+		if(loggedAdmin==null)
+		{
+			throw new CustomerException("Admin not login , Please Enter a Valid Key....");
+		}else {
 		Optional<Plants> opt= pdao.findById(plant.getPlantId());
 		if(opt.isPresent()) {
 		Plants updatedPlants = pdao.save(plant);
 			return updatedPlants;
 		}else
-			throw new PlantsException("Invalid Plant details");
+			throw new PlantsException("Invalid Plant details");}
 	}
 	
 	@Override
-	public Plants deletePlantsbyId(Integer plantId) throws PlantsException {
+	public Plants deletePlantsbyId(Integer plantId,String key) throws PlantsException {
+		CurrentUserSession  loggedAdmin = cDao.findByUuid(key);
+		
+		if(loggedAdmin==null)
+		{
+			throw new CustomerException("Admin not login , Please Enter a Valid Key....");
+		}else {
 		Optional<Plants> opt = pdao.findById(plantId);
 		if (opt.isPresent()) {
 			Plants existingPlants = opt.get();
 			pdao.delete(existingPlants);
 			return existingPlants;
 		} else
-			throw new PlantsException("Plant does not exist with Id :" + plantId);
+			throw new PlantsException("Plant does not exist with Id :" + plantId);}
 	}
 	
 	@Override

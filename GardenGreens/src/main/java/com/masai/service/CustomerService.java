@@ -22,7 +22,7 @@ public interface CustomerService {
 	
 	public List<Customer> viewAllCustomer() throws CustomerException;
 	
-	public String addOrderToCustomer(int id, Orders order) throws CustomerException,OrderException;
+	public String addOrderToCustomer(String id, Orders order) throws CustomerException,OrderException;
 	
 	public Set<Orders> viewAllOrders(int id) throws CustomerException,OrderException;
 	

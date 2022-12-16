@@ -1,6 +1,8 @@
 package com.masai.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +17,11 @@ public class OrderController {
 	private OrderService oService;
 	
 	@PostMapping("/orders")
-	public Orders addOrder(@RequestBody Orders order) {
+	public ResponseEntity<Orders> addOrder(@RequestBody Orders order) {
 		
-		return oService.addOrder(order);
+		Orders o = oService.addOrder(order);
+		
+		return new ResponseEntity<>(o,HttpStatus.ACCEPTED);
 		
 	}
 	
