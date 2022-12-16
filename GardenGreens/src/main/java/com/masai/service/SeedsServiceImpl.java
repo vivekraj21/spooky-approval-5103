@@ -67,29 +67,29 @@ public class SeedsServiceImpl implements SeedsServices{
 		
 	}
 
-	@Override
-	public Seeds deleteSeed(Seeds seed,String key) throws SeedsExceptions {
-		// TODO Auto-generated method stub
-		
-         CurrentUserSession  loggedAdmin = cDao.findByUuid(key);
-		
-		if(loggedAdmin==null)
-		{
-			throw new CustomerException("Admin not login , Please Enter a Valid Key....");
-		}else {
-			
-			Optional<Seeds> opt = sDao.findById(seed.getSeedId());
-			Seeds sd = opt.get();
-			if(opt.isPresent()) {
-				sDao.delete(sd);
-				return sd;
-			}else {
-				throw new  SeedsExceptions("Seeds does not exits....");
-			}
-		}
-		
-		
-	}
+//	@Override
+//	public Seeds deleteSeed(Seeds seed,String key) throws SeedsExceptions {
+//		// TODO Auto-generated method stub
+//		
+//         CurrentUserSession  loggedAdmin = cDao.findByUuid(key);
+//		
+//		if(loggedAdmin==null)
+//		{
+//			throw new CustomerException("Admin not login , Please Enter a Valid Key....");
+//		}else {
+//			
+//			Optional<Seeds> opt = sDao.findById(seed.getSeedId());
+//			Seeds sd = opt.get();
+//			if(opt.isPresent()) {
+//				sDao.delete(sd);
+//				return sd;
+//			}else {
+//				throw new  SeedsExceptions("Seeds does not exits....");
+//			}
+//		}
+//		
+//		
+//	}
 
 	@Override
 	public Seeds viewSeedById(Integer SeedId) throws SeedsExceptions {
@@ -133,14 +133,26 @@ public class SeedsServiceImpl implements SeedsServices{
 	}
 
 	@Override
-	public List<Seeds> viewAllSeedsByType(String typeOfSeed) throws SeedsExceptions {
+	public Seeds deleteSeed(Integer seedId, String key) throws SeedsExceptions {
 		// TODO Auto-generated method stub
-		
-		
-		
-		
 		return null;
 	}
+
+	@Override
+	public List<Seeds> viewAllSeedsByType(String typeOfSeed) throws SeedsExceptions {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//	@Override
+//	public List<Seeds> viewAllSeedsByType(String typeOfSeed) throws SeedsExceptions {
+//		// TODO Auto-generated method stub
+//		
+//		
+//		
+//		
+//		return null;
+//	}
 
 
 	
