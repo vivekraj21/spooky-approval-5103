@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +18,10 @@ import com.masai.exception.SeedsExceptions;
 import com.masai.model.Seeds;
 import com.masai.service.SeedsServices;
 
-import jakarta.validation.Valid;
+
 
 @RestController
+@RequestMapping("/seedservice")
 public class SeedController {
 	
 	@Autowired
@@ -27,7 +29,7 @@ public class SeedController {
 	
 
 	@PostMapping("/Seeds/{key}")
-	public ResponseEntity<Seeds> addSeeds(@Valid  @RequestBody Seeds seeds, @PathVariable("key") String key) throws SeedsExceptions {
+	public ResponseEntity<Seeds> addSeeds(@RequestBody Seeds seeds, @PathVariable("key") String key) throws SeedsExceptions {
 		
 		Seeds newSeeds = sService.addPSeed(seeds, key);
 
@@ -38,7 +40,7 @@ public class SeedController {
 	
 	
 	@PostMapping("/Seeds")
-	public ResponseEntity<Seeds> updateSeeds(@Valid  @RequestBody Seeds Seeds, @RequestParam("key") String key) throws SeedsExceptions {
+	public ResponseEntity<Seeds> updateSeeds(@RequestBody Seeds Seeds, @RequestParam("key") String key) throws SeedsExceptions {
 		
 		Seeds newSeeds = sService.updateSeed(Seeds, key);
 
@@ -49,7 +51,7 @@ public class SeedController {
 	}
 	
 	@DeleteMapping("/Seeds/{seedId}/{key}")
-	public ResponseEntity<Seeds> deleteSeeds(@Valid  @PathVariable("key") Integer seedId, @PathVariable("key") String key) throws SeedsExceptions {
+	public ResponseEntity<Seeds> deleteSeeds(@PathVariable("key") Integer seedId, @PathVariable("key") String key) throws SeedsExceptions {
 		
 		Seeds newSeeds = sService.deleteSeed(seedId, key);
 
@@ -61,7 +63,7 @@ public class SeedController {
 	
 	
 	@GetMapping("/Seeds/{SeedsId}")
-	public ResponseEntity<Seeds> viewSeedsById(@Valid @PathVariable("SeedsId") Integer SeedsId) throws SeedsExceptions {
+	public ResponseEntity<Seeds> viewSeedsById(@PathVariable("SeedsId") Integer SeedsId) throws SeedsExceptions {
 		
 		Seeds newSeeds = sService.viewSeedById(SeedsId);
 
@@ -72,7 +74,7 @@ public class SeedController {
 	}
 	
 	@GetMapping("/Seeds/{commonName}")
-	public ResponseEntity<List<Seeds>> viewSeedByCommonName(@Valid @PathVariable("commonName") String commonName) throws SeedsExceptions {
+	public ResponseEntity<List<Seeds>> viewSeedByCommonName(@PathVariable("commonName") String commonName) throws SeedsExceptions {
 		
 		List<Seeds> SeedsList = sService.viewSeedByCommonName(commonName);
 
