@@ -9,18 +9,18 @@ import com.masai.model.Seeds;
 
 public interface SeedsServices {
 	
-    public Plants addPSeed(Seeds seeds)throws SeedsExceptions;
+    public Seeds addPSeed(Seeds seeds,String key)throws SeedsExceptions;
 	
-	public Plants updateSeed(Seeds seed)throws SeedsExceptions;
+	public Seeds updateSeed(Seeds seed,String key)throws SeedsExceptions;
 	
-	public Plants deleteSeed(Seeds seed)throws SeedsExceptions;
+	public Seeds deleteSeed(Seeds seed,String key)throws SeedsExceptions;
 
-	public Plants viewSeedById(Integer SeedId)throws SeedsExceptions;
+	public Seeds viewSeedById(Integer SeedId)throws SeedsExceptions;
 
- 	public Plants viewSeedByCommonName(String commonName)throws SeedsExceptions;
+ 	public Seeds viewSeedByCommonName(String commonName)throws SeedsExceptions;
 	
-	public List<Plants> viewAllSeeds()throws SeedsExceptions;
+	public List<Seeds> viewAllSeeds()throws SeedsExceptions;
 	
-	public List<Plants> viewAllSeedsByType(String typeOfSeed)throws SeedsExceptions;
+	public List<Seeds> viewAllSeedsByType(String typeOfSeed)throws SeedsExceptions;
 
 }

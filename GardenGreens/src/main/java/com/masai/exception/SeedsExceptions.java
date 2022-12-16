@@ -6,6 +6,7 @@ public class SeedsExceptions extends Exception{
 		// TODO Auto-generated constructor stub
 		super(mes);
 	}
+	
 	public SeedsExceptions() {
 		// TODO Auto-generated constructor stub
 		super();
