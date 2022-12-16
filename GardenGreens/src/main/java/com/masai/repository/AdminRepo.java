@@ -15,5 +15,6 @@ public interface AdminRepo extends JpaRepository<Admin, Integer>{
 	@Query("from Admin a where a.adminId=?1")
 	public List<Admin> findAdminById(Integer id);
 	
-
+	@Query("from Admin a where a.adminUsername=?1")
+	public Optional<Admin> findByUsername(String username);
 }
