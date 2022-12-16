@@ -2,10 +2,12 @@ package com.masai.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -41,10 +43,12 @@ public class Planter {
 	@Min(value = 0)
 	private int planterCost;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "planterId")
 	private List<Plants> plants;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "planterId")
 	private List<Seeds> seeds;
 	
 	
