@@ -71,16 +71,16 @@ public class SeedController {
 		
 	}
 	
-//	@GetMapping("/Seedss/{commonName}")
-//	public ResponseEntity<List<Seeds>> viewSeedByCommonName(@Valid @PathVariable("commonName") String commonName) throws SeedsExceptions {
-//		
-//		List<Seeds> SeedsList = sService.viewSeedByCommonName(commonName);
-//
-//		return new ResponseEntity<List<Seeds>>(SeedsList, HttpStatus.ACCEPTED);
-//		
-//		
-//		
-//	}
+	@GetMapping("/Seeds/{commonName}")
+	public ResponseEntity<List<Seeds>> viewSeedByCommonName(@Valid @PathVariable("commonName") String commonName) throws SeedsExceptions {
+		
+		List<Seeds> SeedsList = sService.viewSeedByCommonName(commonName);
+
+		return new ResponseEntity<List<Seeds>>(SeedsList, HttpStatus.ACCEPTED);
+		
+		
+		
+	}
 	
 	
 	@GetMapping("/Seeds")
