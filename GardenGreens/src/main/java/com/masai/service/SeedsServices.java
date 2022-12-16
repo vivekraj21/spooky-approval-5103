@@ -13,7 +13,7 @@ public interface SeedsServices {
 	
 	public Seeds updateSeed(Seeds seed,String key)throws SeedsExceptions;
 	
-	public Seeds deleteSeed(Seeds seed,String key)throws SeedsExceptions;
+	public Seeds deleteSeed(Integer seedId,String key)throws SeedsExceptions;
 
 	public Seeds viewSeedById(Integer SeedId)throws SeedsExceptions;
 

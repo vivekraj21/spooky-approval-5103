@@ -23,20 +23,20 @@ public class PlantsController {
 	private PlantsService pService;
 	
 	@PostMapping("/plants")
-	public ResponseEntity<Plants> addPlantHandler(@RequestBody Plants plant){
-		Plants newPlant= pService.addPlant(plant);
+	public ResponseEntity<Plants> addPlantHandler(@RequestBody Plants plant,@PathVariable("key") String key){
+		Plants newPlant= pService.addPlant(plant,key);
 		return new ResponseEntity<Plants>(newPlant, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/plants")
-	public ResponseEntity<Plants> updatePlantsHandler(@RequestBody Plants plant){
-		Plants updatedPlant = pService.updatePlants(plant);
+	public ResponseEntity<Plants> updatePlantsHandler(@RequestBody Plants plant,@PathVariable("key") String key){
+		Plants updatedPlant = pService.updatePlants(plant,key);
 		return new ResponseEntity<Plants>(updatedPlant, HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/plants/{plantId}")
-	public ResponseEntity<Plants> deletePlantsbyIdHandler(@PathVariable("plantId") Integer plantId){
-		Plants deletedPlant = pService.deletePlantsbyId(plantId);
+	public ResponseEntity<Plants> deletePlantsbyIdHandler(@PathVariable("plantId") Integer plantId,@PathVariable("key") String key){
+		Plants deletedPlant = pService.deletePlantsbyId(plantId,key);
 		return new ResponseEntity<Plants>(deletedPlant, HttpStatus.OK);
 	}
 	

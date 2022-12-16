@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.exception.AdminException;
+import com.masai.exception.CustomerException;
 import com.masai.exception.LogInException;
 import com.masai.model.Admin;
+import com.masai.model.Customer;
 import com.masai.service.AdminService;
 
 import jakarta.validation.Valid;
@@ -35,31 +37,31 @@ public class AdminController {
 	
 //-----------------------------------------------------------------------------------------------------------	
 	
-//	@DeleteMapping("/customer/{customerId}/{key}")
-//	public ResponseEntity<Customer> deleteCustomer(@PathVariable("customerId") Integer customerId,@PathVariable("key") String key) throws CustomerException
-//	{
-//		Customer user = adminService.deleteCustomer(customerId,key);
-//		
-//		return new ResponseEntity<Customer>(user,HttpStatus.OK);
-//	}
+	@DeleteMapping("/customer/{customerId}/{key}")
+	public ResponseEntity<Customer> deleteCustomer(@PathVariable("customerId") Integer customerId,@PathVariable("key") String key) throws CustomerException
+	{
+		Customer user = adminService.deleteCustomer(customerId,key);
+		
+		return new ResponseEntity<Customer>(user,HttpStatus.OK);
+	}
 	
 //-----------------------------------------------------------------------------------------------------------
 	
-//	@GetMapping("/customers/{key}")
-//	public ResponseEntity<List<Customer> > viewAllCustomer(@PathVariable("key") String key) throws LogInException, CustomerException
-//	{
-//		List<Customer> customer = adminService.viewAllCustomers(key);
-//		
-//		return new ResponseEntity<List<Customer> >(customer,HttpStatus.ACCEPTED);
-//	}
+	@GetMapping("/customers/{key}")
+	public ResponseEntity<List<Customer> > viewAllCustomer(@PathVariable("key") String key) throws LogInException, CustomerException
+	{
+		List<Customer> customer = adminService.viewAllCustomers(key);
+		
+		return new ResponseEntity<List<Customer> >(customer,HttpStatus.ACCEPTED);
+	}
 	
 //------------------------------------------------------------------------------------------------------------
 	
-//	@GetMapping("/customers/{customerId}/{key}")
-//	public ResponseEntity<Customer> viewCustomerById(@PathVariable("customerId") Integer id,@PathVariable("key") String key) throws LoginException, CustomerException
-//	{
-//		Customer customer = adminService.viewCustomer(id, key);
-//		
-//		return new ResponseEntity<Customer>(customer,HttpStatus.ACCEPTED);
-//	}
+	@GetMapping("/customers/{customerId}/{key}")
+	public ResponseEntity<Customer> viewCustomerById(@PathVariable("customerId") Integer id,@PathVariable("key") String key) throws LogInException, CustomerException
+	{
+		Customer customer = adminService.viewCustomer(id, key);
+		
+		return new ResponseEntity<Customer>(customer,HttpStatus.ACCEPTED);
+	}
 }

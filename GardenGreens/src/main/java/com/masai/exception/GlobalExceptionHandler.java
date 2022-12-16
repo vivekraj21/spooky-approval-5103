@@ -42,4 +42,22 @@ public class GlobalExceptionHandler {
 	return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
 						
 	}	
+	
+	@ExceptionHandler(LogInException.class)
+	public ResponseEntity<MyErrorDetails> ExceptionHandler(LogInException ee,WebRequest req){
+		
+		MyErrorDetails err=new MyErrorDetails(LocalDateTime.now(), ee.getMessage(), req.getDescription(false));
+	
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.NOT_FOUND);
+		
+	}
+	
+	@ExceptionHandler(AdminException.class)
+	public ResponseEntity<MyErrorDetails> ExceptionHandler(AdminException ee,WebRequest req){
+		
+		MyErrorDetails err=new MyErrorDetails(LocalDateTime.now(), ee.getMessage(), req.getDescription(false));
+	
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.NOT_FOUND);
+		
+	}
 }
