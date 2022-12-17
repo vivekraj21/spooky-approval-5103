@@ -29,14 +29,17 @@ public class Orders {
 	private Integer orderId;
 	private LocalDate orderDate;
 	private String transactionMode;
-	private Integer quantity;
+	private Integer planterQuantity;
+	private Integer plantQuantity;
 	private Double cost;
-	
+	private Integer customerId;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderId")
 	private Set<Planter> planters = new HashSet<>();
 	
-	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "orderId")
+	private Set<Plants> plants = new HashSet<>();
 	
 	
 }

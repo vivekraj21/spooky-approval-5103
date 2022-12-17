@@ -11,4 +11,6 @@ public interface CustomerDao extends JpaRepository<Customer, Integer>{
 
 	@Query("from Customer c where c.username=?1")
 	public Optional<Customer> findByUsername(String username);
+	
+	public Customer findByCustomerEmail(String email);
 }
