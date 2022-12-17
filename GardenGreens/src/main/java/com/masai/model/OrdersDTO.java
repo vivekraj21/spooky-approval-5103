@@ -9,18 +9,20 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class CustomerDTO {
 
-	
-	private String customerName;
-	
+
+public class OrdersDTO {
+
 	private String customerEmail;
 	
-	private String username;
+	private Integer planterId;
 	
-	private String password;
+	private Integer plantId;
 	
-	private Address address;
+	private Integer quantityPlanter;
 	
+	private Integer quantityPlant;
+	
+	private String transactionMode;
 	
 }
