@@ -167,16 +167,28 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Orders viewOrder(Integer id) throws OrderException {
+	public Orders viewOrder(Integer orderId, String key) throws OrderException, CustomerException {
 
-		Optional<Orders> opt = oDao.findById(id);
-		if (opt.isPresent()) {
+		CurrentUserSession loggeduser = currentUserRepo.findByUuid(key);
 
-			return opt.get();
-
+		if (loggeduser == null) {
+			throw new CustomerException("Please login first and Enter a Valid Key to viewing the order.");
 		}
 
-		throw new OrderException("No order found with Id : " + id);
+		Optional<Customer> opt = customerDao.findById(loggeduser.getUserId());
+
+		Optional<Orders> orders = oDao.findById(orderId);
+
+		if (opt.isPresent()) {
+			if (orders.isPresent()) {
+				if (orders.get().getCustomerId() == opt.get().getCustomerId()) {
+					return orders.get();
+				}
+				throw new CustomerException("invalid key , Please login first for viewing the order. ");
+			}
+			throw new OrderException("No order found with this order id " + orderId);
+		}
+		throw new CustomerException("Invalid key details , Please login first for viewing the order. ");
 	}
 
 	@Override
