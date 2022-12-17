@@ -29,36 +29,39 @@ public class LogInServiceImp implements LogInService{
 	private CurrentSessionRepo sDao;
 
 	@Override
-	public String logInService(LogInDTO logdto) throws LogInException {
+	public String logInService(LogInDTO logdto,String adminORcustomer) throws LogInException {
 		
-         
+         if(adminORcustomer.equals("admin")) {
+        	 Optional<Admin> admin = aDao.findByUsername(logdto.getUsername());
+ 			Admin existingAdmin = admin.get();
+ 			
+ 			if(existingAdmin == null) {
+ 				
+ 				throw new LogInException("Wrong input!! Please Enter a valid details...");
+ 			}
+ 			
+ 			if(existingAdmin.getAdminPassword().equals(logdto.getPassword())) {
+ 				
+ 				String key= Integer.toString((int)(Math.random()*10000));
+ 				
+ 				CurrentUserSession currentUserSession = new CurrentUserSession(existingAdmin.getAdminId(),key,LocalDateTime.now());
+ 				
+ 				sDao.save(currentUserSession);
+
+ 				return currentUserSession.toString();
+ 			}
+ 			else
+ 				throw new LogInException("Wrong credentials....");
+         }
+         else {
 		Optional<Customer> customer= cDao.findByUsername(logdto.getUsername());
 		
 		Customer existingCustomer = customer.get();
 		
 		if(existingCustomer == null) {
 			
-			Optional<Admin> admin = aDao.findByUsername(logdto.getUsername());
-			Admin existingAdmin = admin.get();
-			
-			if(existingAdmin == null) {
-				
-				throw new LogInException("Wrong input!! Please Enter a valid mobile number...");
-			}
-			
-			if(existingAdmin.getAdminPassword().equals(logdto.getPassword())) {
-				
-				String key= Integer.toString((int)(Math.random()*10000));
-				
-				CurrentUserSession currentUserSession = new CurrentUserSession(existingAdmin.getAdminId(),key,LocalDateTime.now());
-				
-				sDao.save(currentUserSession);
+			throw new LogInException("Wrong input!! Please Enter a valid details...");
 
-				return currentUserSession.toString();
-			}
-			else
-				throw new LogInException("Wrong credentials....");
-			
 		}
 		
 		Optional<CurrentUserSession> validCustomerSessionOpt =  sDao.findByUserId(existingCustomer.getCustomerId());
@@ -81,7 +84,7 @@ public class LogInServiceImp implements LogInService{
 		}
 		else
 			throw new LogInException("Please Enter a valid password");
-		
+         }
 		
 	}
 

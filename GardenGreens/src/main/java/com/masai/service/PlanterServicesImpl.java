@@ -131,7 +131,7 @@ public class PlanterServicesImpl implements PlanterServices{
 	}
 
 	@Override
-	public List<Planter> viewAllPlantersByCostRange(double minCost, double maxCost) throws PlanterExceptions {
+	public List<Planter> viewAllPlantersByCostRange(Integer minCost, Integer maxCost) throws PlanterExceptions {
 		// TODO Auto-generated method stub
 		
 		List<Planter> pList = ptdao.findByplanterCostBetween(minCost, maxCost);

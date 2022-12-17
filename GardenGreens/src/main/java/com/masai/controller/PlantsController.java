@@ -24,25 +24,25 @@ public class PlantsController {
 	@Autowired
 	private PlantsService pService;
 	
-	@PostMapping("/plants")
+	@PostMapping("/plants/{key}")
 	public ResponseEntity<Plants> addPlantHandler(@RequestBody Plants plant,@PathVariable("key") String key){
 		Plants newPlant= pService.addPlant(plant,key);
 		return new ResponseEntity<Plants>(newPlant, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/plants")
+	@PutMapping("/plants/{key}")
 	public ResponseEntity<Plants> updatePlantsHandler(@RequestBody Plants plant,@PathVariable("key") String key){
 		Plants updatedPlant = pService.updatePlants(plant,key);
 		return new ResponseEntity<Plants>(updatedPlant, HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/plants/{plantId}")
+	@DeleteMapping("/plants/{plantId}/{key}")
 	public ResponseEntity<Plants> deletePlantsbyIdHandler(@PathVariable("plantId") Integer plantId,@PathVariable("key") String key){
 		Plants deletedPlant = pService.deletePlantsbyId(plantId,key);
 		return new ResponseEntity<Plants>(deletedPlant, HttpStatus.OK);
 	}
 	
-	@GetMapping("/plants/{plantId}")
+	@GetMapping("/plantsId/{plantId}")
 	public ResponseEntity<Plants> ViewPlantByIdHandler(@PathVariable("plantId") Integer plantId){
 		Plants plant = pService.ViewPlantById(plantId);
 		return new ResponseEntity<Plants>(plant,HttpStatus.OK);
@@ -60,7 +60,7 @@ public class PlantsController {
 		return new ResponseEntity<List<Plants>>(plants,HttpStatus.OK);
 	}
 	
-	@GetMapping("/plants/{plantType}")
+	@GetMapping("/plantstype/{plantType}")
 	public ResponseEntity<List<Plants>> ViewAllPlantsByTypeHandler(@PathVariable("plantType") String plantType){
 		List<Plants> plants = pService.ViewAllPlantsByType(plantType);
 		return new ResponseEntity<List<Plants>>(plants,HttpStatus.OK);

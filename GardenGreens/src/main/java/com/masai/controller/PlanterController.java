@@ -31,7 +31,7 @@ public class PlanterController {
 	private PlanterServices ptServices;
 	
 	
-	@PostMapping("/planters/{key}")
+	@PostMapping("/plantersadd/{key}")
 	public ResponseEntity<Planter> addPlanter(@RequestBody Planter planter, @PathVariable("key") String key) throws PlanterExceptions {
 		
 		Planter newPlanter = ptServices.addPlanter(planter, key);
@@ -42,7 +42,7 @@ public class PlanterController {
 	}
 	
 	
-	@PostMapping("/planters")
+	@PostMapping("/plantersup/{key}")
 	public ResponseEntity<Planter> updatePlanter(@RequestBody Planter planter, @RequestParam("key") String key) throws PlanterExceptions {
 		
 		Planter newPlanter = ptServices.updatePlanter(planter, key);
@@ -53,7 +53,7 @@ public class PlanterController {
 		
 	}
 	
-	@DeleteMapping("/planters/{key}")
+	@DeleteMapping("/plantersdel/{key}")
 	public ResponseEntity<Planter> deletePlanter(@RequestBody Planter planter, @PathVariable("key") String key) throws PlanterExceptions {
 		
 		Planter newPlanter = ptServices.deletePlanter(planter, key);
@@ -65,7 +65,7 @@ public class PlanterController {
 	}
 	
 	
-	@GetMapping("/planters/{planterId}")
+	@GetMapping("/plantersview/{planterId}")
 	public ResponseEntity<Planter> viewByPlanterId(@PathVariable("planterId") Integer planterId) throws PlanterExceptions {
 		
 		Planter newPlanter = ptServices.viewPlanter(planterId);
@@ -76,7 +76,7 @@ public class PlanterController {
 		
 	}
 	
-	@GetMapping("/planters/{planterShape}")
+	@GetMapping("/plantersshape/{planterShape}")
 	public ResponseEntity<List<Planter>> viewPlanterByShape(@PathVariable("planterShape") String planterShape) throws PlanterExceptions {
 		
 		List<Planter> planterList = ptServices.viewPlantersByShape(planterShape);
@@ -100,7 +100,7 @@ public class PlanterController {
 	}
 	
 	@GetMapping("/planters/{minCost}/{maxCost}")
-	public ResponseEntity<List<Planter>>viewAllPlantersByCostRange(@PathVariable("minCost") Double minCost,@PathVariable("maxCost") Double maxCost) throws PlanterExceptions {
+	public ResponseEntity<List<Planter>>viewAllPlantersByCostRange(@PathVariable("minCost") Integer minCost,@PathVariable("maxCost") Integer maxCost) throws PlanterExceptions {
 		
 		List<Planter> planterList = ptServices.viewAllPlantersByCostRange(minCost,maxCost);
 		

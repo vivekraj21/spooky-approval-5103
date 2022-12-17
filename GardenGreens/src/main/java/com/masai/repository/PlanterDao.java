@@ -12,7 +12,7 @@ public interface PlanterDao extends JpaRepository<Planter, Integer>{
 	
 //	public List<Planter> findByplanterShape(String planterShape) throws PlanterExceptions;
 	
-	public List<Planter>  findByplanterCostBetween(double minCost ,double maxCost) throws PlanterExceptions;
+	public List<Planter>  findByplanterCostBetween(Integer minCost ,Integer maxCost) throws PlanterExceptions;
 
 	public List<Planter> findByplanterShape(String planterShape)throws PlanterExceptions;
 

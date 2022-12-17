@@ -5,7 +5,7 @@ import com.masai.model.LogInDTO;
 
 public interface LogInService {
 
-	 public String logInService (LogInDTO logdto) throws LogInException;
+	 public String logInService (LogInDTO logdto,String adminORcustomer) throws LogInException;
 		
 	 public String logOutService (String Key) throws LogInException;
 }
