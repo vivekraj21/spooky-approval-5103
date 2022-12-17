@@ -21,9 +21,9 @@ public class LogInController {
 	private LogInService logService;
 	
 	@PostMapping("/logIn")
-	public ResponseEntity<String> logInService(@RequestBody LogInDTO logdto) throws LogInException{
+	public ResponseEntity<String> logInService(@RequestBody LogInDTO logdto,@RequestParam String adminORcustomer) throws LogInException{
 		
-		String output = logService.logInService(logdto);
+		String output = logService.logInService(logdto,adminORcustomer);
 		
 		return new ResponseEntity<String>(output,HttpStatus.OK);
 	}
