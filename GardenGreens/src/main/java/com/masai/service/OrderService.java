@@ -11,12 +11,8 @@ public interface OrderService {
 
 	public Orders addOrder(OrdersDTO orders, String key) throws OrderException,CustomerException;
 	
-	public Orders updateOrder(Orders order) throws OrderException;
-	
 	public String deleteOrder(Integer orderId, String key) throws OrderException, CustomerException ;
 	
-	public Orders viewOrder(Integer orderId, String key) throws OrderException, CustomerException;
-	
-	public List<Orders> viewAllOrders() throws OrderException;
+	public List<Orders> viewAllOrders(String key) throws OrderException;
 	
 }

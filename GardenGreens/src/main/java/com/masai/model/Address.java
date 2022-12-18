@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 public class Address {
-    
-	//hello
+   
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer addressId;
@@ -25,6 +23,7 @@ public class Address {
 	private String city;
 	private String state;
 	private String pincode;
+	
 	
 	
 }

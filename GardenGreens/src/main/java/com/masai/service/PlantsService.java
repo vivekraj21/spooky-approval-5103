@@ -19,6 +19,6 @@ public interface PlantsService {
 	
 	public List<Plants> ViewAllPlants()throws PlantsException;
 	
-	public List<Plants> ViewAllPlantsByType(String plantType)throws PlantsException;
+	
 	
 }

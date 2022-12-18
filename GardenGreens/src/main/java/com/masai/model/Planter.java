@@ -1,17 +1,10 @@
 package com.masai.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,13 +37,7 @@ public class Planter {
 	@Min(value = 0)
 	private int planterCost;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "planterId")
-	private List<Plants> plants;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "planterId")
-	private List<Seeds> seeds;
 	
 	
 	

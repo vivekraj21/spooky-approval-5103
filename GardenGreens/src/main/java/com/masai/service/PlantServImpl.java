@@ -95,14 +95,7 @@ public class PlantServImpl implements PlantsService {
 			return plants;
 	}
 	
-	@Override
-	public List<Plants> ViewAllPlantsByType(String plantType)throws PlantsException{
-			List<Plants> plants = pdao.findByPlantType(plantType);
-			if (plants.isEmpty())
-				throw new PlantsException("Plant does not exist with Type :" + plantType);
-			else
-				return plants;
-	}	
+		
 
 	
 }

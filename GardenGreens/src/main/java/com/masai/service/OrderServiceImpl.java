@@ -1,6 +1,7 @@
 package com.masai.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -59,19 +60,12 @@ public class OrderServiceImpl implements OrderService {
 
 			Orders orderDetails = new Orders();
 			orderDetails.setOrderDate(LocalDate.now());
-			if (orders.getTransactionMode() == null) {
-				throw new OrderException("please enter payment gateway like UPI or Waller or Net Banking.");
-			}
-
-			if (orders.getQuantityPlant() <= 0 && orders.getQuantityPlanter() <= 0) {
-				throw new OrderException("please add one for placing the order.");
-			}
-
 			orderDetails.setTransactionMode(orders.getTransactionMode());
-			if (orderDetails.getPlanterQuantity() > 0) {
+			
+			if (orders.getQuantityPlanter() > 0) {
 				orderDetails.setPlanterQuantity(orders.getQuantityPlanter());
 			}
-			if (orderDetails.getPlantQuantity() > 0) {
+			if (orders.getQuantityPlant() > 0) {
 				orderDetails.setPlantQuantity(orders.getQuantityPlant());
 			}
 
@@ -80,10 +74,6 @@ public class OrderServiceImpl implements OrderService {
 			Optional<Planter> planter = planterDao.findById(orders.getPlanterId());
 			Optional<Plants> plant = plantDao.findById(orders.getPlantId());
 
-			if (!(planter.isPresent() && plant.isPresent())) {
-				throw new OrderException(
-						"Invalid product Id , put right Product Id , Please add one product to place the order.");
-			}
 
 			if (planter.isPresent()) {
 
@@ -94,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
 					orderDetails.setPlanters(list);
 					planter.get().setPlanterStock(planter.get().getPlanterStock() - orders.getQuantityPlanter());
 					planterDao.save(planter.get());
-					total = total + orders.getQuantityPlanter() * planter.get().getPlanterCost();
+					total = total + (orders.getQuantityPlanter() * planter.get().getPlanterCost());
 				} else
 					throw new OrderException("Insufficient stock for planters ");
 
@@ -115,7 +105,7 @@ public class OrderServiceImpl implements OrderService {
 
 			}
 
-			orderDetails.setCost(total);
+			orderDetails.setCost((int) total);
 			oDao.save(orderDetails);
 
 			return orderDetails;
@@ -126,18 +116,7 @@ public class OrderServiceImpl implements OrderService {
 
 	}
 
-	@Override
-	public Orders updateOrder(Orders order) throws OrderException {
 
-		Optional<Orders> opt = oDao.findById(order.getOrderId());
-
-		if (opt.isPresent()) {
-			Orders o = oDao.save(order);
-			return o;
-		}
-
-		throw new OrderException("Invalid Order Details...");
-	}
 
 	@Override
 	public String deleteOrder(Integer orderId, String key) throws OrderException, CustomerException {
@@ -166,41 +145,19 @@ public class OrderServiceImpl implements OrderService {
 		throw new CustomerException("Invalid key details , Please login first for deleting the order. ");
 	}
 
-	@Override
-	public Orders viewOrder(Integer orderId, String key) throws OrderException, CustomerException {
+	
 
+	@Override
+	public List<Orders> viewAllOrders(String key) throws OrderException {
 		CurrentUserSession loggeduser = currentUserRepo.findByUuid(key);
-
-		if (loggeduser == null) {
-			throw new CustomerException("Please login first and Enter a Valid Key to viewing the order.");
-		}
-
+		List<Orders> li = new ArrayList<>();
 		Optional<Customer> opt = customerDao.findById(loggeduser.getUserId());
-
-		Optional<Orders> orders = oDao.findById(orderId);
-
-		if (opt.isPresent()) {
-			if (orders.isPresent()) {
-				if (orders.get().getCustomerId() == opt.get().getCustomerId()) {
-					return orders.get();
-				}
-				throw new CustomerException("invalid key , Please login first for viewing the order. ");
-			}
-			throw new OrderException("No order found with this order id " + orderId);
+		
+		if(opt.get()!=null) {
+			li.addAll(opt.get().getOrders());
+			return li ;
 		}
-		throw new CustomerException("Invalid key details , Please login first for viewing the order. ");
-	}
-
-	@Override
-	public List<Orders> viewAllOrders() throws OrderException {
-
-		List<Orders> list = oDao.findAll();
-
-		if (list.size() == 0) {
-			throw new OrderException("No records of orders....");
-		}
-
-		return list;
+		else throw new OrderException("No order yet been placed...");
 	}
 
 }
