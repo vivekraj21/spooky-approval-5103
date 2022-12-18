@@ -9,8 +9,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class CustomerDTO {
+public class CustomerDTO{
 
+	private Integer customerId;
 	
 	private String customerName;
 	
@@ -19,6 +20,8 @@ public class CustomerDTO {
 	private String username;
 	
 	private String password;
+	
+	private Integer balance;
 	
 	private Address address;
 	

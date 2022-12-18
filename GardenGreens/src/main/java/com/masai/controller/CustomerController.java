@@ -1,20 +1,19 @@
 package com.masai.controller;
-import java.time.LocalDate;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.masai.exception.CustomerException;
 import com.masai.model.Customer;
-import com.masai.model.Orders;
+import com.masai.model.CustomerDTO;
 import com.masai.service.CustomerService;
 import com.masai.service.OrderService;
 
@@ -29,35 +28,28 @@ public class CustomerController {
 	private OrderService oService;
 	
 	@PostMapping("/customer")
-	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
-		
-		
-		
+	public ResponseEntity<Customer> addCustomer(@RequestBody CustomerDTO customer) {
 		Customer c = cService.addCustomer(customer);
 		return new ResponseEntity<Customer>(c, HttpStatus.ACCEPTED);
 		
 	}
 	
-	
-	@PostMapping("/customer/order/{name}")
-	public ResponseEntity<String> addOrderToCustomer(@PathVariable("username") String username, @RequestBody Orders order) {
+	@DeleteMapping("/customerdel/{username}/{key}")
+	public ResponseEntity<Customer> deleteCustomer(@PathVariable("username") String username,@PathVariable("key") String key) throws CustomerException
+	{
+		Customer user = cService.deleteCustomer(username,key);
 		
-		
-		order.setOrderDate(LocalDate.now());
-		cService.addOrderToCustomer(username, order);
-		
-		return new ResponseEntity<String>("Order Placed...",HttpStatus.OK);
-		
+		return new ResponseEntity<Customer>(user,HttpStatus.OK);
 	}
 	
-	@GetMapping("/customer/order/{id}")
-	public ResponseEntity<Set<Orders>> viewAllOrders(@PathVariable("id") int id){
-		
-		Set<Orders> o = cService.viewAllOrders(id);
-		
-		return new ResponseEntity<Set<Orders>>(o,HttpStatus.OK);
-		
+
+	@PutMapping("/customerup/{key}")
+	public ResponseEntity<Customer> updatecustomerHandler(@RequestBody CustomerDTO customer,@PathVariable("key") String key){
+		Customer c = cService.upDateCustomer(customer,key);
+		return new ResponseEntity<Customer>(c, HttpStatus.ACCEPTED);
 	}
+	
+	
 	
 	
 	

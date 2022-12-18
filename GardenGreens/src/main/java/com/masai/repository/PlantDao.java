@@ -13,6 +13,6 @@ public interface PlantDao extends JpaRepository<Plants, Integer> {
 	
 	public Optional<Plants> findByPlantName(String plantName);
 	
-	public List<Plants> findByPlantType(String plantType);
+	
 
 }

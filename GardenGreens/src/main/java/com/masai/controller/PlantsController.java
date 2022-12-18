@@ -60,11 +60,7 @@ public class PlantsController {
 		return new ResponseEntity<List<Plants>>(plants,HttpStatus.OK);
 	}
 	
-	@GetMapping("/plantstype/{plantType}")
-	public ResponseEntity<List<Plants>> ViewAllPlantsByTypeHandler(@PathVariable("plantType") String plantType){
-		List<Plants> plants = pService.ViewAllPlantsByType(plantType);
-		return new ResponseEntity<List<Plants>>(plants,HttpStatus.OK);
-	}
+	
 	
 	
 	

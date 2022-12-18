@@ -9,8 +9,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
-
 public class OrdersDTO {
 
 	private String customerEmail;

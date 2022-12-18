@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,10 +28,12 @@ public class Customer {
 	private String customerEmail;
 	private String username;
 	private String password;
+	private Integer balance;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customerId")
 	private Address address;
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customerId")
 	private Set<Orders> orders = new HashSet<>();	
