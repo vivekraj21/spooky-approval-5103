@@ -29,3 +29,8 @@ The tech stack we have used is :-
 ## Er Diagram
 ![alt text](https://i.ibb.co/2PfBRwr/ERDIA.png)
 
+## Modules
+![alt text](https://i.ibb.co/jgDvHfk/hello-Module1.png)
+![alt text](https://i.ibb.co/dgB0QjT/modul2.png)
+
+
