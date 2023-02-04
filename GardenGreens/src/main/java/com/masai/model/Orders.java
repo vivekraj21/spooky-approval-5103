@@ -34,11 +34,11 @@ public class Orders {
 	
 	private Integer customerId;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name = "orderId")
 	private Set<Planter> planters = new HashSet<>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name = "orderId")
 	private Set<Plants> plants = new HashSet<>();
 	
